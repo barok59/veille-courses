@@ -103,7 +103,8 @@ def main():
 
             # Mettre à jour la date d'ouverture connue
             state["courses"][url]["ouverture"] = c.get("ouverture")
-
+    print(len(courses))
+    
     # 2. Envoyer les rappels J-1 et H-1
     for url, info in state["courses"].items():
         ouv_iso = info.get("ouverture")
