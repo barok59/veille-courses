@@ -60,10 +60,14 @@ def geocoder(lieu, state):
 
 
 def dans_zone(course, state):
-    coords = geocoder(course["lieu"], state)
-    if not coords:
-        return False
-    return distance_km(*CENTRE, *coords) <= RAYON_KM
+    if "coords" in course:
+        lat, lon = course["coords"]
+    else:
+        coords = geocoder(course["lieu"], state)
+        if not coords:
+            return False
+        lat, lon = coords
+    return distance_km(*CENTRE, lat, lon) <= RAYON_KM
 
 
 def distance_suffisante(course):
