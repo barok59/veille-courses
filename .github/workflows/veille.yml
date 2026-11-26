@@ -36,7 +36,10 @@ jobs:
           git config user.email "veille-bot@users.noreply.github.com"
           git add state.json
           git diff --staged --quiet || (git commit -m "maj état" && git push)
+      
       - name: Lancer la veille
         env:
-          MODE: ${{ github.event.schedule == '*/5 * * * *' && 'rappels' || 'scan' }}
-        run: python veille.py $MODE
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          DISCORD_CHANNEL_ID: ${{ secrets.DISCORD_CHANNEL_ID }}
+        run: python veille.py ${{ github.event.schedule == '*/5 * * * *' && 'rappels' || 'scan' }}
