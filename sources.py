@@ -1,6 +1,13 @@
 import re
 import requests
+import math
+
 from bs4 import BeautifulSoup
+
+MILES_URL = "https://fr.milesrepublic.com/_search/multi-search"
+FINISHERS_URL = "https://vn2qtcjsbg0ea481p.a1.typesense.net/multi_search?x-typesense-api-key=G1BPjGr3KDU7n6yylcfOREpRVGUBpKYW"
+RAYON_RECHERCHE = 30  # km, marge large autour de Gondecourt, le filtre fin est dans veille.py
+
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
@@ -23,11 +30,6 @@ def date_klikego(texte):
     if not m or m.group(2) not in MOIS:
         return None
     return f"{m.group(3)}-{MOIS[m.group(2)]:02d}-{int(m.group(1)):02d}"
-
-
-def scan_ffa():
-    """Mis de côté pour l'instant."""
-    return []
 
 
 def scan_1000pattes():
@@ -57,38 +59,82 @@ def scan_1000pattes():
         print(f"Erreur scan 1000 Pattes : {e}")
         return []
 
+def _distance_km(lat1, lon1, lat2, lon2):
+    r = 6371
+    p1, p2 = math.radians(lat1), math.radians(lat2)
+    dp, dl = p2 - p1, math.radians(lon2 - lon1)
+    a = math.sin(dp / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2
+    return 2 * r * math.asin(math.sqrt(a))
 
-def scan_klikego():
-    """Cartes de courses de la recherche Klikego (HTML)."""
+
+def scan_milesrepublic():
+    """Miles Republic (Typesense), courses Nord et Pas-de-Calais autour de Gondecourt."""
+    body = {"searches": [{
+        "indexUid": "fra_events",
+        "q": "",
+        "limit": 200,
+        "filter": "editionCalendarStatus != 'CANCELLED'",
+    }]}
     try:
-        r = requests.get(KLIKEGO_URL, headers=HEADERS, timeout=20)
+        r = requests.post(MILES_URL, json=body, headers=HEADERS, timeout=20)
         r.raise_for_status()
-        soup = BeautifulSoup(r.text, "html.parser")
+        hits = r.json()["results"][0]["hits"]
         courses = []
-        for card in soup.find_all("div", class_=lambda c: c and "md:max-w-64" in c.split()):
-            link = card.find("a", href=True)
-            titre = card.select_one("div.text-text-base-bolder")
-            lieu = card.select_one("div.text-text-base-medium")
-            date = card.select_one("span.flex-1")
-            if not (link and titre):
+        for h in hits:
+            geo = h.get("_geo") or {}
+            if not geo.get("lat"):
                 continue
-            distances = []
-            for badge in card.select("span.badge"):
-                m = re.search(r"([\d,]+)\s*km", badge.get_text())
-                if m:
-                    distances.append(float(m.group(1).replace(",", ".")))
+            ts = h.get("editionLiveStartDateTimestamp")
+            date = dt.datetime.fromtimestamp(ts).strftime("%Y-%m-%dT%H:%M") if ts else None
             courses.append({
-                "url": link["href"],
-                "nom": titre.get_text(strip=True),
-                "date": date_klikego(date.get_text()) if date else None,
-                "ouverture": None,  # absente de la liste, à récupérer sur la fiche
-                "lieu": nettoyer_lieu(lieu.get_text()) if lieu else "",
-                "distances": distances,
+                "url": f"https://fr.milesrepublic.com/event/{h['eventSlug']}",
+                "nom": h["eventName"],
+                "date": date,
+                "ouverture": None,  # non fourni par l'index, à récupérer sur la fiche
+                "lieu": f"{h['eventCity']}, {h.get('eventCountrySubdivisionNameLevel2', '')}",
+                "distances": h.get("distances") or [],
+                "coords": (geo["lat"], geo["lng"]),
             })
         return courses
     except Exception as e:
-        print(f"Erreur scan Klikego : {e}")
+        print(f"Erreur scan Miles Republic : {e}")
         return []
 
 
-SOURCES = [scan_1000pattes, scan_klikego]
+def scan_finishers():
+    """Finishers (Typesense), courses du Nord."""
+    body = {"searches": [{
+        "collection": "races_2026-11-26_03-12-08",  # nom de collection vu dans la réponse
+        "q": "*",
+        "per_page": 100,
+        "group_by": "eventId",
+        "group_limit": 1,
+        "filter_by": "level2Id:=7199541a-1480-41c7-850c-7962113897ff",
+    }]}
+    try:
+        r = requests.post(FINISHERS_URL, json=body, headers=HEADERS, timeout=20)
+        r.raise_for_status()
+        courses = []
+        for group in r.json()["results"][0]["grouped_hits"]:
+            d = group["hits"][0]["document"]
+            geo = d.get("_geoloc") or {}
+            if not geo.get("lat"):
+                continue
+            courses.append({
+                "url": d.get("eventRegistrationUrl") or f"https://www.finishers.com/{d.get('eventSlug', '')}",
+                "nom": d["eventName"],
+                "date": dt.datetime.fromtimestamp(d["raceDate"]).strftime("%Y-%m-%dT%H:%M"),
+                "ouverture": None,
+                "lieu": f"{d['city']}, Nord",
+                "distances": [x / 1000 for x in d.get("raceDistanceVariants", [])
+                              if d.get("raceDistanceUnit") == "meters"],
+                "coords": (geo["lat"], geo["lng"]),
+            })
+        return courses
+    except Exception as e:
+        print(f"Erreur scan Finishers : {e}")
+        return []
+
+
+SOURCES = [scan_1000pattes, scan_milesrepublic, scan_finishers]
+
