@@ -1,5 +1,138 @@
 {
-  "courses": {},
+  "courses": {
+    "https://www.finishers.com/course-stop-violences-faites-aux-femmes": {
+      "nom": "Course Stop Violences Faites Aux Femmes",
+      "ouverture": null
+    },
+    "https://www.finishers.com/courses-nocturne-citadelle-de-lille": {
+      "nom": "Course nocturne contre les violences faites aux femmes ",
+      "ouverture": null
+    },
+    "/book/event/wbneH": {
+      "nom": "Forestrail de Phalempin",
+      "ouverture": null
+    },
+    "https://www.finishers.com/la-lilloise": {
+      "nom": "La Lilloise",
+      "ouverture": null
+    },
+    "https://www.finishers.com/course-du-chicon": {
+      "nom": "Course du Chicon",
+      "ouverture": null
+    },
+    "https://www.finishers.com/marathon-international-de-lille": {
+      "nom": "Marathon International de Lille ",
+      "ouverture": null
+    },
+    "https://www.finishers.com/la-landasienne-doctobre-rose": {
+      "nom": "La Landasienne d'Octobre Rose",
+      "ouverture": null
+    },
+    "https://www.finishers.com/ekiden": {
+      "nom": "Ekiden France Environnement",
+      "ouverture": null
+    },
+    "https://www.finishers.com/ekiden-villeneuve-d-ascq": {
+      "nom": "Ekiden Villeneuve d'Ascq",
+      "ouverture": null
+    },
+    "https://www.finishers.com/flo-werun": {
+      "nom": "Flo'WeRun",
+      "ouverture": null
+    },
+    "https://www.finishers.com/la-yul": {
+      "nom": "La YUL",
+      "ouverture": null
+    },
+    "https://www.finishers.com/en-perdre-allennes": {
+      "nom": "En perdre Allennes",
+      "ouverture": null
+    },
+    "/book/event/pugBT": {
+      "nom": "NeuroRun - Lille",
+      "ouverture": null
+    },
+    "https://www.finishers.com/semi-marathon-de-marcq-en-baroeul": {
+      "nom": "Semi-Marathon de Marcq-en-Barœul",
+      "ouverture": null
+    },
+    "https://www.finishers.com/les-foulees-pecquencourtoises": {
+      "nom": "Les Foulées Pecquencourtoises ",
+      "ouverture": null
+    },
+    "https://www.finishers.com/les-foulees-fretinoises": {
+      "nom": "Les Foulées Fretinoises",
+      "ouverture": null
+    },
+    "https://www.finishers.com/trail-de-la-petite-sensee-2": {
+      "nom": "Trail de la Petite Sensée",
+      "ouverture": null
+    },
+    "https://www.finishers.com/semi-marathon-de-phalempin": {
+      "nom": "Semi-Marathon de Phalempin",
+      "ouverture": null
+    },
+    "https://www.finishers.com/10km-de-lhexagone-de-wasquehal": {
+      "nom": "Les 10 Km de l'Hexagone",
+      "ouverture": null
+    },
+    "https://www.finishers.com/l-xaltante": {
+      "nom": "L'Xaltante",
+      "ouverture": null
+    },
+    "https://www.finishers.com/tous-en-piste-a-capinghem": {
+      "nom": "Tous en Piste à Capinghem !",
+      "ouverture": null
+    },
+    "https://www.finishers.com/la-frite-odyssey": {
+      "nom": "La Frite Odyssey",
+      "ouverture": null
+    },
+    "https://www.finishers.com/les-foulees-grusonnoises": {
+      "nom": "Les Foulées Grusonnoises",
+      "ouverture": null
+    },
+    "https://www.finishers.com/odyssea-villeneuve-d-ascq": {
+      "nom": "Odysséa Villeneuve d'Ascq",
+      "ouverture": null
+    },
+    "https://www.finishers.com/courses-de-la-citadelle": {
+      "nom": "Course de la Citadelle de Lille",
+      "ouverture": null
+    },
+    "https://www.finishers.com/les-courses-du-moulin": {
+      "nom": "Les Courses du Moulin",
+      "ouverture": null
+    },
+    "https://www.finishers.com/jogging-des-fraises": {
+      "nom": "Jogging des Fraises",
+      "ouverture": null
+    },
+    "https://www.finishers.com/les-foulees-vertes-de-merignies": {
+      "nom": "Les Foulées Vertes de Mérignies",
+      "ouverture": null
+    },
+    "https://www.finishers.com/les-boucles-de-gayant": {
+      "nom": "Les Boucles de Gayant",
+      "ouverture": null
+    },
+    "https://www.finishers.com/la-route-du-louvre": {
+      "nom": "La Route du Louvre ",
+      "ouverture": null
+    },
+    "https://www.finishers.com/la-course-des-2-stades-domitys": {
+      "nom": "La course des 2 Stades Domitys",
+      "ouverture": null
+    },
+    "https://www.helloasso.com/associations/cheer-up-edhec": {
+      "nom": "Course contre le Cancer Cheer Up EDHEC",
+      "ouverture": null
+    },
+    "https://www.finishers.com/les-foulees-disidore": {
+      "nom": "Les Foulées d'Isidore",
+      "ouverture": null
+    }
+  },
   "geo": {
     "Soissons, Aisne": [
       49.377401,
