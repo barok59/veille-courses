@@ -270,5 +270,6 @@
     ]
   },
   "envois": [],
-  "prochain_id": 34
+  "prochain_id": 34,
+  "dernier_message_id": null
 }
