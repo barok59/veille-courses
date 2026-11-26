@@ -67,6 +67,8 @@ def dans_zone(course, state):
 
 
 def distance_suffisante(course):
+    if not course["distances"]:
+        return True  # distance inconnue : on garde, à vérifier sur la fiche
     return any(d >= DISTANCE_MIN_KM for d in course["distances"])
 
 
