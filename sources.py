@@ -6,6 +6,9 @@ import datetime as dt
 from bs4 import BeautifulSoup
 
 MILES_URL = "https://fr.milesrepublic.com/_search/multi-search"
+MILES_TOKEN_URL = "https://fr.milesrepublic.com/search-token"
+MILES_SEARCH_URL = "https://fr.milesrepublic.com/_search/multi-search"
+
 FINISHERS_URL = "https://vn2qtcjsbg0ea481p.a1.typesense.net/multi_search?x-typesense-api-key=G1BPjGr3KDU7n6yylcfOREpRVGUBpKYW"
 RAYON_RECHERCHE = 30  # km, marge large autour de Gondecourt, le filtre fin est dans veille.py
 
@@ -67,31 +70,49 @@ def _distance_km(lat1, lon1, lat2, lon2):
     a = math.sin(dp / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2
     return 2 * r * math.asin(math.sqrt(a))
 
-
 def scan_milesrepublic():
-    """Miles Republic (Typesense), courses Nord et Pas-de-Calais autour de Gondecourt."""
-    body = {"searches": [{
-        "indexUid": "fra_events",
-        "q": "",
-        "limit": 200,
-        "filter": "editionCalendarStatus != 'CANCELLED'",
-    }]}
+    """Miles Republic : token de session, puis recherche géographique (comme le site)."""
     try:
-        r = requests.post(MILES_URL, json=body, headers=HEADERS, timeout=20)
+        s = requests.Session()
+        s.headers.update(HEADERS)
+        s.headers.update({
+            "Origin": "https://fr.milesrepublic.com",
+            "Referer": "https://fr.milesrepublic.com/search?geoSearch=51.0894%2C4.2301%2C49.9707%2C2.0677&geoLocation=Nord",
+        })
+
+        tok = s.post(MILES_TOKEN_URL, timeout=15)
+        tok.raise_for_status()
+        token = tok.json()["token"]
+
+        body = {"queries": [{
+            "indexUid": "fra_events",
+            "q": "",
+            "hitsPerPage": 500,
+            "filter": [
+                "_geoBoundingBox([51.0894, 4.2301], [49.9707, 2.0677])",
+                f"editionLiveEndDateTimestamp > {int(dt.datetime.now().timestamp())} AND eventStatus = \"LIVE\"",
+            ],
+            "attributesToRetrieve": ["objectID", "eventName", "eventSlug", "eventCity",
+                                     "eventCountrySubdivisionNameLevel2", "editionLiveStartDateTimestamp",
+                                     "distances", "_geo"],
+        }]}
+        r = s.post(MILES_SEARCH_URL, json=body,
+                   headers={"X-TYPESENSE-API-KEY": token, "Authorization": f"Bearer {token}"},
+                   timeout=20)
         r.raise_for_status()
         hits = r.json()["results"][0]["hits"]
+
         courses = []
         for h in hits:
             geo = h.get("_geo") or {}
             if not geo.get("lat"):
                 continue
             ts = h.get("editionLiveStartDateTimestamp")
-            date = dt.datetime.fromtimestamp(ts).strftime("%Y-%m-%dT%H:%M") if ts else None
             courses.append({
                 "url": f"https://fr.milesrepublic.com/event/{h['eventSlug']}",
                 "nom": h["eventName"],
-                "date": date,
-                "ouverture": None,  # non fourni par l'index, à récupérer sur la fiche
+                "date": dt.datetime.fromtimestamp(ts).strftime("%Y-%m-%dT%H:%M") if ts else None,
+                "ouverture": None,
                 "lieu": f"{h['eventCity']}, {h.get('eventCountrySubdivisionNameLevel2', '')}",
                 "distances": h.get("distances") or [],
                 "coords": (geo["lat"], geo["lng"]),
