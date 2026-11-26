@@ -78,6 +78,12 @@ def distance_suffisante(course):
 
 def main():
     state = load_state()
+
+    for i, info in enumerate(state["courses"].values(), start=1):
+        info.setdefault("id", i)
+        info.setdefault("suivie", False)
+    state["prochain_id"] = max([i["id"] for i in state["courses"].values()] + [0]) + 1
+    
     now = dt.datetime.now()  # heure locale du serveur : configurée en Europe/Paris dans le workflow
 
     # 1. Scanner les sources
