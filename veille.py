@@ -96,14 +96,23 @@ def main():
             connue = state["courses"].get(url)
 
             if connue is None:
-                notifier(
-                    f"🆕 Nouvelle course : **{c['nom']}** le {c['date']} "
-                    f"({c['lieu']}, distances : {', '.join(str(d) + ' km' for d in c['distances'])})\n{url}"
-                )
-                state["courses"][url] = {"nom": c["nom"], "ouverture": c.get("ouverture")}
-            elif not connue.get("ouverture") and c.get("ouverture"):
-                notifier(f"📣 Ouverture des inscriptions annoncée : **{c['nom']}**\n{url}")
-                connue["ouverture"] = c["ouverture"]
+                cid = state.get("prochain_id", 1)
+                state["prochain_id"] = cid + 1
+                state["courses"][url] = {
+                    "id": cid, "nom": c["nom"], "date": c.get("date"),
+                    "lieu": c["lieu"], "distances": c.get("distances", []),
+                    "ouverture": c.get("ouverture"), "suivie": False,
+                }
+                # Pas de notification : la course est juste enregistrée
+            else:
+                connue.setdefault("id", state.get("prochain_id", 1))
+                if "prochain_id" not in state or connue["id"] >= state["prochain_id"]:
+                    state["prochain_id"] = connue["id"] + 1
+                connue.setdefault("suivie", False)
+                if not connue.get("ouverture") and c.get("ouverture"):
+                    connue["ouverture"] = c["ouverture"]
+                    if connue["suivie"]:
+                        notifier(f"📣 Ouverture annoncée : **{c['nom']}** (#{connue['id']})\n{url}")
 
             # Mettre à jour la date d'ouverture connue
             state["courses"][url]["ouverture"] = c.get("ouverture")
