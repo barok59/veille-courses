@@ -10,7 +10,7 @@
       "nom": "Course nocturne contre les violences faites aux femmes ",
       "ouverture": null,
       "id": 2,
-      "suivie": false
+      "suivie": true
     },
     "/book/event/wbneH": {
       "nom": "Forestrail de Phalempin",
