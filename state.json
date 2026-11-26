@@ -28,7 +28,7 @@
       "nom": "Course du Chicon",
       "ouverture": null,
       "id": 5,
-      "suivie": true
+      "suivie": false
     },
     "https://www.finishers.com/marathon-international-de-lille": {
       "nom": "Marathon International de Lille ",
@@ -271,5 +271,5 @@
   },
   "envois": [],
   "prochain_id": 34,
-  "dernier_message_id": "1575520837811961889"
+  "dernier_message_id": "1575522631774371911"
 }
