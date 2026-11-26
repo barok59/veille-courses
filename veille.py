@@ -8,8 +8,8 @@ import requests
 from sources import SOURCES
 
 # --- Paramètres ---
-CENTRE = (50.4936, 3.0353)   # lat, lon approximatives de Gondecourt : vérifiez-les
-RAYON_KM = 15
+CENTRE = (50.5063, 3.0286)  # Gondecourt (Nord), à vérifier sur une carte
+RAYON_KM = 20
 DISTANCE_MIN_KM = 10
 WEBHOOK = os.environ.get("DISCORD_WEBHOOK", "")
 STATE_FILE = Path("state.json")
