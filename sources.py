@@ -158,5 +158,4 @@ def scan_finishers():
         return []
 
 
-SOURCES = [scan_1000pattes, scan_milesrepublic, scan_finishers]
-
+SOURCES = [scan_1000pattes, scan_finishers]  # scan_milesrepublic désactivé (429)
