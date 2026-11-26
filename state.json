@@ -1,5 +1,74 @@
 {
   "courses": {},
-  "geo": {},
+  "geo": {
+    "Soissons, Aisne": [
+      49.377401,
+      3.327272
+    ],
+    "Gamaches, Somme": [
+      49.985918,
+      1.556299
+    ],
+    "Boves, Somme": [
+      49.849782,
+      2.376974
+    ],
+    "Eppeville, Somme": [
+      49.738563,
+      3.050583
+    ],
+    "Camon, Somme": [
+      49.900914,
+      2.356551
+    ],
+    "Abbeville, Somme": [
+      50.105799,
+      1.828902
+    ],
+    "Friville escarbotin, Somme": [
+      50.086363,
+      1.542594
+    ],
+    "Meaulte, Somme": [
+      49.984217,
+      2.666486
+    ],
+    "Amiens, Somme": [
+      49.90384,
+      2.286081
+    ],
+    "Albert, Somme": [
+      50.002051,
+      2.653772
+    ],
+    "Airaines, Somme": [
+      49.968574,
+      1.936719
+    ],
+    "Frise, Somme": [
+      49.940327,
+      2.817464
+    ],
+    "Givenchy en gohelle, Pas de Calais": [
+      50.397757,
+      2.773992
+    ],
+    "Talmas, Somme": [
+      50.035275,
+      2.335986
+    ],
+    "Heilly, Somme": [
+      49.949358,
+      2.538511
+    ],
+    "Bornel, Oise": [
+      49.208652,
+      2.194276
+    ],
+    "Querrieu, Somme": [
+      49.941491,
+      2.427357
+    ]
+  },
   "envois": []
 }
