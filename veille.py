@@ -130,6 +130,7 @@ def main():
 
     save_state(state)
 
+print("TEST", len(__import__("sources").scan_milesrepublic()), len(__import__("sources").scan_finishers()))
 
 if __name__ == "__main__":
     main()
