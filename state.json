@@ -2,135 +2,201 @@
   "courses": {
     "https://www.finishers.com/course-stop-violences-faites-aux-femmes": {
       "nom": "Course Stop Violences Faites Aux Femmes",
-      "ouverture": null
+      "ouverture": null,
+      "id": 1,
+      "suivie": false
     },
     "https://www.finishers.com/courses-nocturne-citadelle-de-lille": {
       "nom": "Course nocturne contre les violences faites aux femmes ",
-      "ouverture": null
+      "ouverture": null,
+      "id": 2,
+      "suivie": false
     },
     "/book/event/wbneH": {
       "nom": "Forestrail de Phalempin",
-      "ouverture": null
+      "ouverture": null,
+      "id": 3,
+      "suivie": false
     },
     "https://www.finishers.com/la-lilloise": {
       "nom": "La Lilloise",
-      "ouverture": null
+      "ouverture": null,
+      "id": 4,
+      "suivie": false
     },
     "https://www.finishers.com/course-du-chicon": {
       "nom": "Course du Chicon",
-      "ouverture": null
+      "ouverture": null,
+      "id": 5,
+      "suivie": false
     },
     "https://www.finishers.com/marathon-international-de-lille": {
       "nom": "Marathon International de Lille ",
-      "ouverture": null
+      "ouverture": null,
+      "id": 6,
+      "suivie": false
     },
     "https://www.finishers.com/la-landasienne-doctobre-rose": {
       "nom": "La Landasienne d'Octobre Rose",
-      "ouverture": null
+      "ouverture": null,
+      "id": 7,
+      "suivie": false
     },
     "https://www.finishers.com/ekiden": {
       "nom": "Ekiden France Environnement",
-      "ouverture": null
+      "ouverture": null,
+      "id": 8,
+      "suivie": false
     },
     "https://www.finishers.com/ekiden-villeneuve-d-ascq": {
       "nom": "Ekiden Villeneuve d'Ascq",
-      "ouverture": null
+      "ouverture": null,
+      "id": 9,
+      "suivie": false
     },
     "https://www.finishers.com/flo-werun": {
       "nom": "Flo'WeRun",
-      "ouverture": null
+      "ouverture": null,
+      "id": 10,
+      "suivie": false
     },
     "https://www.finishers.com/la-yul": {
       "nom": "La YUL",
-      "ouverture": null
+      "ouverture": null,
+      "id": 11,
+      "suivie": false
     },
     "https://www.finishers.com/en-perdre-allennes": {
       "nom": "En perdre Allennes",
-      "ouverture": null
+      "ouverture": null,
+      "id": 12,
+      "suivie": false
     },
     "/book/event/pugBT": {
       "nom": "NeuroRun - Lille",
-      "ouverture": null
+      "ouverture": null,
+      "id": 13,
+      "suivie": false
     },
     "https://www.finishers.com/semi-marathon-de-marcq-en-baroeul": {
       "nom": "Semi-Marathon de Marcq-en-Barœul",
-      "ouverture": null
+      "ouverture": null,
+      "id": 14,
+      "suivie": false
     },
     "https://www.finishers.com/les-foulees-pecquencourtoises": {
       "nom": "Les Foulées Pecquencourtoises ",
-      "ouverture": null
+      "ouverture": null,
+      "id": 15,
+      "suivie": false
     },
     "https://www.finishers.com/les-foulees-fretinoises": {
       "nom": "Les Foulées Fretinoises",
-      "ouverture": null
+      "ouverture": null,
+      "id": 16,
+      "suivie": false
     },
     "https://www.finishers.com/trail-de-la-petite-sensee-2": {
       "nom": "Trail de la Petite Sensée",
-      "ouverture": null
+      "ouverture": null,
+      "id": 17,
+      "suivie": false
     },
     "https://www.finishers.com/semi-marathon-de-phalempin": {
       "nom": "Semi-Marathon de Phalempin",
-      "ouverture": null
+      "ouverture": null,
+      "id": 18,
+      "suivie": false
     },
     "https://www.finishers.com/10km-de-lhexagone-de-wasquehal": {
       "nom": "Les 10 Km de l'Hexagone",
-      "ouverture": null
+      "ouverture": null,
+      "id": 19,
+      "suivie": false
     },
     "https://www.finishers.com/l-xaltante": {
       "nom": "L'Xaltante",
-      "ouverture": null
+      "ouverture": null,
+      "id": 20,
+      "suivie": false
     },
     "https://www.finishers.com/tous-en-piste-a-capinghem": {
       "nom": "Tous en Piste à Capinghem !",
-      "ouverture": null
+      "ouverture": null,
+      "id": 21,
+      "suivie": false
     },
     "https://www.finishers.com/la-frite-odyssey": {
       "nom": "La Frite Odyssey",
-      "ouverture": null
+      "ouverture": null,
+      "id": 22,
+      "suivie": false
     },
     "https://www.finishers.com/les-foulees-grusonnoises": {
       "nom": "Les Foulées Grusonnoises",
-      "ouverture": null
+      "ouverture": null,
+      "id": 23,
+      "suivie": false
     },
     "https://www.finishers.com/odyssea-villeneuve-d-ascq": {
       "nom": "Odysséa Villeneuve d'Ascq",
-      "ouverture": null
+      "ouverture": null,
+      "id": 24,
+      "suivie": false
     },
     "https://www.finishers.com/courses-de-la-citadelle": {
       "nom": "Course de la Citadelle de Lille",
-      "ouverture": null
+      "ouverture": null,
+      "id": 25,
+      "suivie": false
     },
     "https://www.finishers.com/les-courses-du-moulin": {
       "nom": "Les Courses du Moulin",
-      "ouverture": null
+      "ouverture": null,
+      "id": 26,
+      "suivie": false
     },
     "https://www.finishers.com/jogging-des-fraises": {
       "nom": "Jogging des Fraises",
-      "ouverture": null
+      "ouverture": null,
+      "id": 27,
+      "suivie": false
     },
     "https://www.finishers.com/les-foulees-vertes-de-merignies": {
       "nom": "Les Foulées Vertes de Mérignies",
-      "ouverture": null
+      "ouverture": null,
+      "id": 28,
+      "suivie": false
     },
     "https://www.finishers.com/les-boucles-de-gayant": {
       "nom": "Les Boucles de Gayant",
-      "ouverture": null
+      "ouverture": null,
+      "id": 29,
+      "suivie": false
     },
     "https://www.finishers.com/la-route-du-louvre": {
       "nom": "La Route du Louvre ",
-      "ouverture": null
+      "ouverture": null,
+      "id": 30,
+      "suivie": false
     },
     "https://www.finishers.com/la-course-des-2-stades-domitys": {
       "nom": "La course des 2 Stades Domitys",
-      "ouverture": null
+      "ouverture": null,
+      "id": 31,
+      "suivie": false
     },
     "https://www.helloasso.com/associations/cheer-up-edhec": {
       "nom": "Course contre le Cancer Cheer Up EDHEC",
-      "ouverture": null
+      "ouverture": null,
+      "id": 32,
+      "suivie": false
     },
     "https://www.finishers.com/les-foulees-disidore": {
       "nom": "Les Foulées d'Isidore",
-      "ouverture": null
+      "ouverture": null,
+      "id": 33,
+      "suivie": false
     }
   },
   "geo": {
@@ -203,5 +269,6 @@
       2.427357
     ]
   },
-  "envois": []
+  "envois": [],
+  "prochain_id": 34
 }
