@@ -120,6 +120,8 @@ def main():
     
     # 2. Envoyer les rappels J-1 et H-1
     for url, info in state["courses"].items():
+        if not info.get("suivie"):
+            continue
         ouv_iso = info.get("ouverture")
         if not ouv_iso:
             continue
