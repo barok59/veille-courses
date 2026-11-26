@@ -126,3 +126,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+print(__import__("sources").scan_klikego()[:3])
