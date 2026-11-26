@@ -3,7 +3,7 @@ name: veille-courses
 on:
   schedule:
     - cron: "0 * * * *"      # scan complet, toutes les heures
-    - cron: "*/5 * * * *"    # rappels seuls, sans requête vers les sites
+    - cron: "*/5 * * * *"    # rappels et commandes seulement
   workflow_dispatch:
 
 permissions:
@@ -14,11 +14,13 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  scan:
+  veille:
     runs-on: ubuntu-latest
     env:
       TZ: Europe/Paris
       DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+      DISCORD_CHANNEL_ID: ${{ secrets.DISCORD_CHANNEL_ID }}
     steps:
       - uses: actions/checkout@v4
 
@@ -28,7 +30,10 @@ jobs:
 
       - run: pip install requests beautifulsoup4
 
-      - run: python veille.py
+      - name: Lancer la veille
+        env:
+          MODE: ${{ github.event.schedule == '*/5 * * * *' && 'rappels' || 'scan' }}
+        run: python veille.py $MODE
 
       - name: Sauvegarder l'état
         run: |
@@ -36,10 +41,3 @@ jobs:
           git config user.email "veille-bot@users.noreply.github.com"
           git add state.json
           git diff --staged --quiet || (git commit -m "maj état" && git push)
-      
-      - name: Lancer la veille
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
-          DISCORD_CHANNEL_ID: ${{ secrets.DISCORD_CHANNEL_ID }}
-        run: python veille.py ${{ github.event.schedule == '*/5 * * * *' && 'rappels' || 'scan' }}
